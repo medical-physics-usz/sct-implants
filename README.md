@@ -279,10 +279,45 @@ Use the following argument: ```--netG resnet_attention```
 Use the following argument:
 - ```--dataroot PATH-TO-AUGMENTED-DATASET```
 
-## Acknowledgments
-This work builds on code from:
-- [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
-- [SPADE](https://github.com/NVlabs/SPADE)
-- [medical-physics-usz/synthetic_CT_generation](https://github.com/medical-physics-usz/synthetic_CT_generation)  
-- [Ripple Artifact Quantification in Slice encoding for SEMAC using MR Block Simulation](https://archive.ismrm.org/2024/0772_LUiM26Rak.html)
 ---
+## License
+
+This project is licensed under the MIT License.
+
+This repository also includes third-party code:
+
+- pix2pix - BSD License  
+- DCGAN - BSD License  
+
+Their original license files are located in the respective directories.
+
+---
+## Acknowledgments
+
+This work builds upon open-source implementations and prior research:
+
+- [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)  
+  by Jun-Yan Zhu *et al.* (BSD License).  
+  Related paper:  
+  > Isola, P., Zhu, J.-Y., Zhou, T., & Efros, A. A. (2017).  
+  > *Image-to-Image Translation with Conditional Adversarial Networks.* CVPR.
+
+- [SPADE](https://github.com/NVlabs/SPADE)  
+  by Park *et al.* (CC BY-NC-SA 4.0).  
+  The architecture inspired parts of this work.  
+  Related paper:  
+  > Park, T., Liu, M.-Y., Wang, T.-C., & Zhu, J.-Y. (2019).  
+  > *Semantic Image Synthesis with Spatially-Adaptive Normalization.* CVPR.
+
+- [medical-physics-usz/synthetic_CT_generation](https://github.com/medical-physics-usz/synthetic_CT_generation)  
+  from the Medical Physics group at University Hospital Zurich.
+
+- [Ripple Artifact Quantification in Slice Encoding for SEMAC using MR Block Simulation](https://archive.ismrm.org/2024/0772_LUiM26Rak.html)  
+  ISMRM 2024 abstract related to MRI artifact simulation.
+
+The main theoretical basis for the ripple artifact calculation is taken from:
+
+> Lu, W., Pauly, K. B., Gold, G. E., & Pauly, J. M. (2012).  
+> *SEM imaging and artifact behavior in slice encoding for metal artifact correction (SEMAC).*  
+> Magnetic Resonance in Medicine.  
+> https://pubmed.ncbi.nlm.nih.gov/22711589/
