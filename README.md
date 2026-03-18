@@ -26,20 +26,21 @@ The performance requiring calculations were run on a HPC environment with the op
 ---
 ## Data
 
-The dataset used in this project is internal and comes from the 
-**University Hospital Zurich (USZ)**. Due to data protection and privacy 
-restrictions, it cannot be shared publicly. 
+This project was performed using two datasets:
+
+- **Internal University Hospital Zurich (USZ) dataset**, which cannot be shared publicly due to data protection and privacy restrictions.
+- **SynthRAD2023 dataset**, available in the [data/synthRAD2023](/data/synthRAD2023) folder.
 
 ### Expected structure
 
-Patients are organized into two groups:  
-- **With hip implant** → patient IDs start with `Pat0XX`  
-- **Without implant** → patient IDs start with `Pat2XX`  
+Patients are organized into two groups:
+- **With hip implant** → patient IDs start with `Pat0XX`
+- **Without implant** → patient IDs start with `Pat2XX`
 
-For each patient, the following are required:  
-- **CT** scans (co-registered to MR in-phase)  
-- **Four Dixon MR reconstructions**: in-phase, opposed-phase, water-only, and fat-only  
-- **RTst** folder containing the structure file (contours)  
+For each patient, the following data are required:
+- **CT** scans (co-registered to MR in-phase)
+- **Dixon MR reconstruction**: in-phase 
+- **RTst** folder containing the structure file (contours)
 
 The raw data should be arranged as follows:
 
@@ -49,9 +50,6 @@ raw_data/
         Pat001/
             CT/        # Coregistered CT images
             MR_in/     # MR in-phase
-            MR_opp/    # MR opposed-phase
-            MR_W/      # MR water-only
-            MR_F/      # MR fat-only
             RTst/      # Structure file (contours)
         Pat002/
             ...
@@ -59,14 +57,10 @@ raw_data/
         Pat201/
             CT/
             MR_in/
-            MR_opp/
-            MR_W/
-            MR_F/
             RTst/
         Pat202/
             ...
 ```
-
 
 ---
 ## Data Preprocessing
