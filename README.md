@@ -202,6 +202,7 @@ It can also be run from command line:
 For the available parameters, use the ```--help``` flag or check the python files. The file can be found in ```/sct_metal_implants/data_augmentation/donor_receiver``` folder.
 
 ### Physics-Guided (Ph) Augmentation
+![Ph-Augmentation.png](imgs/Ph-Augmentation.png)
 
 The Ph augmentation differs only in the MR augmentation to the DR approach.
 To model the susceptibility-driven intravoxel dephasing, this approach employs a sinc-product intravoxel dephasing model driven by local B0 field gradients.
