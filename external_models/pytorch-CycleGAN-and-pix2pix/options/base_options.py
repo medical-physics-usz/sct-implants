@@ -65,7 +65,7 @@ class BaseOptions():
         parser.add_argument('--output_modalities', type=str, required=False, default="CT",
                             help="Comma-separated list of output modalities. Default: CT")
         parser.add_argument('--patient_list_excel', type=str, default='',
-                                 help='Path to Excel file listing patient IDs that should be trained on. Important for Dataset Balance Experiment.')
+                                 help='Path to Excel file listing patient IDs that should be trained and which CV splits they belong to.')
         parser.add_argument('--current_split', type=str, default='split1',
                                  help='Specify current split to test cross-validation on.')
 

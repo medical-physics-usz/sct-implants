@@ -97,6 +97,10 @@ This project builds on the existing GAN framework **Pix2Pix** based on the offic
 The adapted framework is located in the `/external_models` directory.  
 Details on the modifications made for this project can be found in the [README](/external_models/README.md) of the `/external_models` folder.  
 
+#### Prerequisites:
+- Preprocessed data from the **Data Preprocessing** step is required as input.  
+- Make sure to have defined cross-validation splits in **patient_info.xlsx** according to the example in ```/configs```.
+
 #### Run Pix2Pix model from single script (training, testing, evaluation)
 
 For convenience, the model has a wrapper script that executes training, testing, and evaluation in sequence.
@@ -123,7 +127,6 @@ The scripts can be found in the folder ```/scripts```.
   python test.py --help
   python evaluation.py --help
   ```
-- Preprocessed data from the **Data Preprocessing** step is required as input.  
 
 ---
 ## Model Evaluation
