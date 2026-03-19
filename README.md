@@ -67,7 +67,7 @@ raw_data/
 
 #### Prerequisites:
 - Set up directory where preprocessed data should be saved
-- Define **patient_info.xlsx** according to the example in [/configs](/configs/preprocessing) containing information
+- Define **patient_info.xlsx** according to the example in ```/configs``` containing information
 about data set split and slice information per patient. Place it in ```/Excel``` folder of preprocessing directory.
 
 ### Running the pipeline
