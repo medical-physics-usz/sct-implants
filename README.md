@@ -67,7 +67,7 @@ raw_data/
 
 #### Prerequisites:
 - Set up directory where preprocessed data should be saved
-- Define **patient_info.xlsx** according to the example in ```/configs``` containing information
+- Define **patient_info.xlsx** according to the example in [/configs](/configs/preprocessing) containing information
 about data set split and slice information per patient. Place it in ```/Excel``` folder of preprocessing directory.
 
 ### Running the pipeline
@@ -94,7 +94,7 @@ For the available parameters, use the ```--help``` flag or check the python file
 
 This project builds on the existing GAN framework **Pix2Pix** based on the official [repository](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).  
 
-The adapted framework is located in the `/external_models` directory.  
+The adapted framework is located in the [/external_models](/external_models) directory.  
 Details on the modifications made for this project can be found in the [README](/external_models/README.md) of the `/external_models` folder.  
 
 #### Prerequisites:
@@ -153,7 +153,7 @@ Before running the dosimetric evaluation, the synthetic CT NFTI files have to be
 DICOM files with original voxel and image size. The following script can be used for this: ```sbatch postprocessing.sh```
 
 The dosimetric evaluation can be run using the bash script: ```run_DVH_calculations.sh```.
-Adjust dataset paths and parameters directly in the bash script, which can be found in the `/scripts` directory.
+Adjust dataset paths and parameters directly in the bash script, which can be found in the [/scripts](/scripts) directory.
 
 
 ### Gamma analysis
@@ -169,7 +169,7 @@ It can also be run from command line:
 
 ```python gamma_analysis.py --help```
 
-For the available parameters, use the ```--help``` flag or check the python files. The file can be found in ```/sct_metal_implants/evaluation/gamma_analysis``` folder.
+For the available parameters, use the ```--help``` flag or check the python files. The file can be found in [/sct_metal_implants/evaluation/gamma_analysis](/sct_metal_implants/evaluation/gamma_analysis) folder.
 
 ---
 ## Data Augmentation
