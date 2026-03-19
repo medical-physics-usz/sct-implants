@@ -67,12 +67,12 @@ raw_data/
 
 #### Prerequisites:
 - Set up directory where preprocessed data should be saved
-- Define **patient_info.xlsx** according to the example in ```/configs``` containing information
+- Define **patient_info.xlsx** according to the example in [/configs](/configs/preprocessing) containing information
 about data set split and slice information per patient. Place it in ```/Excel``` folder of preprocessing directory.
 
 ### Running the pipeline
 #### Running from single script
-The entire pipeline can be run with a single bash script (in ```/scripts``` directory):
+The entire pipeline can be run with a single bash script (in [/scripts](/scripts) directory):
 
 ```sbatch preprocessing_pipeline.sh```
 
@@ -87,7 +87,7 @@ Each preprocessing stage can also be executed individually via command line in t
 ```python 03_normalization.py --help```   → Normalizes CT and MR intensity ranges.  
 ```python 04_dataset_creation.py  --help```   → Splits volumes into 2D slices for training/test datasets. 
 
-For the available parameters, use the ```--help``` flag or check the python files. The files can be found in ```/sct_metal_implants/preprocessing``` folder.
+For the available parameters, use the ```--help``` flag or check the python files. The files can be found in the [/sct_metal_implants/preprocessing](/sct_metal_implants/preprocessing) folder.
 
 ---
 ## Model Training, Inference and Evaluation
@@ -99,12 +99,12 @@ Details on the modifications made for this project can be found in the [README](
 
 #### Prerequisites:
 - Preprocessed data from the **Data Preprocessing** step is required as input.  
-- Make sure to have defined cross-validation splits in **patient_info.xlsx** according to the example in ```/configs```.
+- Make sure to have defined cross-validation splits in **patient_info.xlsx** according to the example in [/configs](/configs/preprocessing).
 
 #### Run Pix2Pix model from single script (training, testing, evaluation)
 
 For convenience, the model has a wrapper script that executes training, testing, and evaluation in sequence.
-The scripts can be found in the folder ```/scripts```.
+The scripts can be found in the folder [/scripts](/scripts).
 
 ```sbatch train_test_eval_pix2pix.sh```
 
@@ -133,7 +133,7 @@ The scripts can be found in the folder ```/scripts```.
 
 ### Image Similarity Evaluation
 
-The files can be found in the ```/sct_metal_implants/evaluation/image_similarity_evaluation/``` folder.  
+The files can be found in the [/sct_metal_implants/evaluation/image_similarity_evaluation](/sct_metal_implants/evaluation/image_similarity_evaluation) folder.  
 The image similarity evaluation can be run with the following script. 
 For the available parameters, use the ```--help``` flag or check the python files.
 
@@ -146,7 +146,7 @@ The model evaluation is typically applied directly in the train-test-eval pipeli
 Clone the [MatRad](https://github.com/e0404/matRad) repository. 
 Use the file ```matRad_hip_implants_all_patients_all_models.m``` to calculate DVH differences
 in the partial arc scenario (avoiding irradiation through implant). And use the file ```matRad_hip_implants_all_patients_all_models_all_angles.m```
-for the full arc scenario (irradiating through implant). The files can be found in the ```/sct_metal_implants/evaluation/dosimetric_evaluation/``` folder.
+for the full arc scenario (irradiating through implant). The files can be found in the [/sct_metal_implants/evaluation/dosimetric_evaluation](/sct_metal_implants/evaluation/dosimetric_evaluation) folder.
 
 
 Before running the dosimetric evaluation, the synthetic CT NFTI files have to be resized and resampled to
@@ -163,7 +163,7 @@ Adjust dataset paths and parameters directly in the bash script, which can be fo
 
 To further analyze the agreement between the dose distribution on the sCT and the dose distribution calculated by matRad,
 run the gamma analysis using the bash script: ```run_gamma_analysis.sh```.
-Adjust dataset paths and parameters directly in the bash script, which can be found in the `/scripts` directory.
+Adjust dataset paths and parameters directly in the bash script, which can be found in the [/scripts](/scripts) directory.
 
 It can also be run from command line:  
 
@@ -186,7 +186,7 @@ This excel contains the information about donor and receiver patients.
 
 #### Run DR Augmentation Pipeline
 
-The DR augmentation pipeline can be run via bash script directly (in ```/scripts``` directory):  
+The DR augmentation pipeline can be run via bash script directly (in [/scripts](/scripts) directory):  
 
 ```sbatch data_augmentation_pipeline.sh```  
 
@@ -196,7 +196,7 @@ It can also be run from command line:
 
 ```python run_data_augmentation.py --help```
 
-For the available parameters, use the ```--help``` flag or check the python files. The file can be found in ```/sct_metal_implants/data_augmentation/donor_receiver``` folder.
+For the available parameters, use the ```--help``` flag or check the python files. The file can be found in [/sct_metal_implants/data_augmentation/donor_receiver](/sct_metal_implants/data_augmentation/donor_receiver) folder.
 
 ### Physics-Guided (Ph) Augmentation
 ![Ph-Augmentation.png](imgs/Ph-Augmentation.png)
@@ -210,7 +210,10 @@ First the off-resonance map is computed using the implant CT mask, from which th
 - Make sure implants rotated correctly relative to B0. Always check that the orientation is axial, coronal, sagittal in clock wise order when opening df.V on volumeViewer.
 
 #### Run Ph Augmentation Pipeline
-1. **Off-resonance map creation**  
+
+The code to the pipeline can be found in [/sct_metal_implants/data_augmentation/physics_guided]([sct_metal_implants/data_augmentation/physics_guided) folder.
+
+1. **Off-resonance map creation** (in MatLab) 
    1. Permutations: Rotate metal-implants to have right rotation + Save as ```.MAT``` files.  
     Run ```nifti_to_mat.m``` in MatLab
    2. Run ```calculateoff_frq_usz.m``` in MatLab  
@@ -219,7 +222,7 @@ First the off-resonance map is computed using the implant CT mask, from which th
     Adjust material susceptibility: *titanium alloy* = 154e-6, *cobalt chrom* = 900e-6.
 
 
-2. **MR Augmentation**
+2. **MR Augmentation** (in python)
    1. Undistorted MR creation: Run ```create_undistorted_mr.ipynb```
    2. Permutations: Make sure off-frequency map matches undistorted MR: Run ```permute_nifti.ipynb```
    3. Run MR distortion notebook: ```dixon_mr_final_usz.ipynb```  
@@ -239,7 +242,7 @@ Please run the GUI as follows:
 
 ```python data_exploration_GUI.py --data_path```
 
-The file can be found in ```/sct_metal_implants/data_exploration``` folder.
+The file can be found in [/sct_metal_implants/data_exploration](/sct_metal_implants/data_exploration) folder.
 
 ---
 ## Experiments

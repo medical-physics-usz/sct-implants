@@ -1,7 +1,7 @@
 # External models
 
-We use exact snapshots of pix2pix and CUT. Their original
-`README.md` and `LICENSE` files are kept intact. Thesis-specific changes are noted here:
+We use exact snapshots of pix2pix. The original
+`README.md` and `LICENSE` files are kept intact. Project-specific changes are noted here:
 
 **Note:** The modified classes, functions and lines have been marked with a `[thesis]` tag in the corresponding files.
 
@@ -41,33 +41,4 @@ We use exact snapshots of pix2pix and CUT. Their original
 - `train.py` has been slightly adapted to configure input and output channels correctly.
 - `test.py` has been slightly adapted to save the generated synthetic CTs to NIFTI files.
 
-
 ---
-## CUT
-
-### Snapshot
--  Repo: https://github.com/taesungp/contrastive-unpaired-translation  
--  Upstream Commit: `b3ac297708dfb6f7589d04662277e53c0d579c27` (2023-09-05)
-
-### Modified files
-
-- `data/`
-  - `aligned_implant_dataset.py` has been created based on original `aligned_implant.py` to enable compatibility
-  with NIFTI files instead of PNGs. It ensures that all the required input and output images can be loaded 
-  (different MR reconstructions, metal masks, CT).
-  - `image_folder.py` has been modified such that NIFTI files can be loaded.
-
-- `options/`
-  - `base_options.py` has been extended with certain arguments. For example `--input_modalities` and `--output_modalities`
-  specify on which input and output modalities the models should be trained on.
-  - `test_options.py` has been extended with certain arguments.
-  
-- `train.py` has been slightly adapted to configure input and output channels correctly.
-- `test.py` has been slightly adapted to save the generated synthetic CTs to NIFTI files.
-
-
-
-
-
-
-
