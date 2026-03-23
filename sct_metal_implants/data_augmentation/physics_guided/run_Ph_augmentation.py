@@ -2,7 +2,7 @@ import argparse
 import os
 import pandas as pd
 
-from create_undistorted_mr import create_undistorted_mr
+from sct_metal_implants.data_augmentation.physics_guided.create_undistorted_mr import create_undistorted_mr
 from sct_metal_implants.data_augmentation.physics_guided.create_distorted_mr import create_distorted_mr
 from sct_metal_implants.data_augmentation.physics_guided.permute_B0_maps import create_permuted_B0_map
 
@@ -13,7 +13,8 @@ def augment_from_config(path_donor, path_receiver, output_path, path_config):
     """
 
     # Make sure output folders exist
-    os.makedirs(output_path, exist_ok=True)
+    metal_mask_path = os.path.join(output_path, "metal_masks")
+    original_B0_path = os.path.join(output_path, "B0_maps")
     output_path_undistorted = os.path.join(output_path, "undistorted_MR_in")
     os.makedirs(output_path_undistorted, exist_ok=True)
     output_path_permuted_B0 = os.path.join(output_path, "permuted_B0_maps")
@@ -50,10 +51,10 @@ def augment_from_config(path_donor, path_receiver, output_path, path_config):
         print(augmented_patient_nr)
 
         # Create undistorted MR
-        create_undistorted_mr(augmented_patient_nr, path_donor, output_path_undistorted)
+        create_undistorted_mr(augmented_patient_nr, metal_mask_path, path_receiver, output_path_undistorted)
 
         # Permute off-frequency map
-        create_permuted_B0_map(augmented_patient_nr, output_path_permuted_B0, flip_x=False, flip_y=False, flip_z=False, swap_x_y=True)
+        create_permuted_B0_map(augmented_patient_nr, original_B0_path, output_path_permuted_B0, flip_x=False, flip_y=False, flip_z=True, swap_x_y=True)
 
         # Augment MR -> distorted MR
         create_distorted_mr(augmented_patient_nr, output_path_undistorted, output_path_permuted_B0, path_receiver, output_path_distorted)

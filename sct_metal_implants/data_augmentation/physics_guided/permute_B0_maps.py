@@ -1,10 +1,11 @@
+import os
 import nibabel as nib
 import numpy as np
 
-def create_permuted_B0_map(augmented_patient_nr, output_path, flip_x, flip_y, flip_z, swap_x_y):
+def create_permuted_B0_map(augmented_patient_nr, original_path, output_path, flip_x, flip_y, flip_z, swap_x_y):
 
     # Path to off-freq map (original)
-    orignal_B0_path = f"B0_{augmented_patient_nr}.nii" # orignal-B0-path
+    orignal_B0_path = os.path.join(original_path, f"B0_{augmented_patient_nr}.nii") # orignal-B0-path
 
     # Load B0 map
     img = nib.load(orignal_B0_path)

@@ -160,7 +160,7 @@ def augment_from_config(path_donor, path_receiver, output_path, plot_path, path_
     print("Augmented all patients in config file!")
 
 
-if __name__ == '__main__2':
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run augmentation pipeline with configurable paths.")
 
     parser.add_argument("--donor_path", required=True,
@@ -176,19 +176,3 @@ if __name__ == '__main__2':
 
     args = parser.parse_args()
     augment_from_config(args.donor_path, args.receiver_path, args.output_path, args.plot_path, args.config_path)
-
-if __name__ == '__main__':
-
-    donor_path = "/media/nico/Extreme SSD/Master Thesis/data/with_hip_implant"
-    receiver_path = "/media/nico/Extreme SSD/Master Thesis/data/without_implant"
-    output_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_nails/patients"
-    plot_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_nails/plots"
-    config_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_nails/"
-
-    donor_path = "/media/nico/Extreme SSD/USZ/data_synthrad_2023/processed_data/with_hip_implant"
-    receiver_path = "/media/nico/Extreme SSD/USZ/data_synthrad_2023/processed_data/without_implant"
-    output_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_synthrad/patients"
-    plot_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_synthrad/plots"
-    config_path = "/media/nico/Extreme SSD/USZ/data_augmentation_thesis/augmented_data_synthrad/"
-
-    augment_from_config(donor_path, receiver_path, output_path, plot_path, config_path)

@@ -2,11 +2,12 @@ from sct_metal_implants.data_augmentation.donor_receiver.dicom_loader import DIC
 
 import nibabel as nib
 import numpy as np
+import os
 
-def create_undistorted_mr(augmented_patient_nr, dicom_path, output_path):
+def create_undistorted_mr(augmented_patient_nr, metal_mask_path, dicom_path, output_path):
 
     # Path to metal mask
-    metal_mask_path = f"mask_{augmented_patient_nr}.nii" # metal-mask-path
+    metal_mask_path_patient = os.path.join(metal_mask_path, f"mask_{augmented_patient_nr}_3D_metal.nii") # metal-mask-path of patient
 
     # Path to MR of receiver patient (without implant)
     receiver_patient_nr = augmented_patient_nr.split("_")[0]
@@ -17,7 +18,7 @@ def create_undistorted_mr(augmented_patient_nr, dicom_path, output_path):
     print(mr.get_volume().shape)
 
     # Load metal mask
-    metal_mask_img = nib.load(metal_mask_path)
+    metal_mask_img = nib.load(metal_mask_path_patient)
     metal_mask = metal_mask_img.get_fdata().transpose(2, 1, 0)
     print(metal_mask.shape)
 
@@ -44,6 +45,6 @@ def create_undistorted_mr(augmented_patient_nr, dicom_path, output_path):
     nifti_img = nib.Nifti1Image(undistorted_mr.transpose(2, 1, 0), affine, hdr)
 
     # Save undistorted MR
-    output_path_patient = output_path + f"undistorted_MR_in_{augmented_patient_nr}.nii"
+    output_path_patient = os.path.join(output_path, f"undistorted_MR_in_{augmented_patient_nr}.nii")
     nib.save(nifti_img, output_path_patient)
     print(f"Saved undistorted MR of: {augmented_patient_nr}")

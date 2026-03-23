@@ -27,9 +27,12 @@ B0_SPACING_MM = (0.5, 0.5, 0.5)
 
 def create_distorted_mr(augmented_patient_nr, output_path_undistorted, output_path_permuted_B0, path_receiver, output_path):
 
+    undistorted_path_patient = os.path.join(output_path_undistorted, f"undistorted_MR_in_{augmented_patient_nr}.nii")
+    permuted_B0_path_patient = os.path.join(output_path_permuted_B0, f"B0_{augmented_patient_nr}.nii")
+
     # Load NIfTIs
-    und_img = nib.load(output_path_undistorted)
-    b0_img = nib.load(output_path_permuted_B0)
+    und_img = nib.load(undistorted_path_patient)
+    b0_img = nib.load(permuted_B0_path_patient)
 
     und = und_img.get_fdata(dtype=np.float32)
     b0 = b0_img.get_fdata(dtype=np.float32)
@@ -51,14 +54,16 @@ def create_distorted_mr(augmented_patient_nr, output_path_undistorted, output_pa
     pred, inter = model.forward(und, b0, verbose=True)
 
     # Load original MR-inphase
-    mr = DICOMSeries(path_receiver, "MR_in")
+    receiver_patient_nr = augmented_patient_nr.split("_")[0]
+    dicom_path_receiver_patient = path_receiver + receiver_patient_nr
+    mr = DICOMSeries(dicom_path_receiver_patient, "MR_in")
 
     # Save DICOM
     output_path_patient = os.path.join(output_path, augmented_patient_nr)
     os.makedirs(output_path_patient, exist_ok=True)
 
     description = f"Augmented: {augmented_patient_nr}"
-    save_dicom(pred.transpose(2, 1, 0), mr.get_slices(), "MR_in", description, output_path)
+    save_dicom(pred.transpose(2, 1, 0), mr.get_slices(), "MR_in", description, output_path_patient)
 
 
 # Helper to save final DICOM
