@@ -48,7 +48,7 @@ def create_slices(path_root_preprocessed, modalities_to_process):
         split = line.Split
         patient_nr = line.StudyID
 
-        if not split in ["train", "test"]:
+        if not split.startswith("split"):
             continue
 
         if patient_nr not in patient_folders:
