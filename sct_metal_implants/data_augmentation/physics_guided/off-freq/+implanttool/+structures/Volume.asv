@@ -1,0 +1,70 @@
+% 
+classdef Volume < implanttool.structures.VoxelMap
+    methods
+        function obj = Volume(V,threshold,voxelSize)
+            arguments
+                V(:,:,:);
+                threshold;
+                voxelSize(1,:) {double} = Volume().voxelSize;
+            end
+            import implanttool.structures.VoxelMap
+            obj@implanttool.structures.VoxelMap(V,voxelSize);
+
+            obj.V = V>threshold;
+        end
+
+        function r = valueRange(obj)
+            r = [0,1];
+        end
+
+        function p = plotVolume(obj, color, alpha, ax)
+            arguments
+                obj implanttool.structures.Volume;
+                color = 'red';
+                alpha = 1;
+                ax = gca;
+            end
+            [X,Y,Z] = obj.coordinates();
+            p = patch(ax,isosurface(X,Y,Z,obj.V));
+            p.FaceColor = color;
+            p.FaceAlpha = alpha;
+            p.EdgeColor = 'none';
+            ax.DataAspectRatio = [1,1,1];
+            ax.View = [-37.5,30];
+            camlight(ax);
+            ax.XLabel.String = obj.axisLabels(1);
+            ax.YLabel.String = obj.axisLabels(2);
+            ax.ZLabel.String = obj.axisLabels(3);
+        end
+
+        function [] = trim(obj, buffer)
+            arguments
+                obj implanttool.structures.Volume;
+                buffer = 1;
+            end
+            [x,y,z] = ind2sub(size(obj.V),find(obj.V));
+            xmin = min(x) - buffer;
+            xmax = max(x) + buffer;
+            ymin = min(y) - buffer;
+            ymax = max(y) + buffer;
+            zmin = min(z) - buffer;
+            zmax = max(z) + buffer;
+            
+            obj.V = obj.V(xmin:xmax,ymin:ymax,zmin:zmax);
+
+            if ~(isempty(obj.X) || isempty(obj.Y) || isempty(obj.Z))
+                obj.X = obj.X(xmin:xmax,ymin:ymax,zmin:zmax);
+                obj.Y = obj.Y(xmin:xmax,ymin:ymax,zmin:zmax);
+                obj.Z = obj.Z(xmin:xmax,ymin:ymax,zmin:zmax);
+            end
+            
+            obj.N = size(obj.V);
+
+        end
+
+        function resampled = resample(obj, voxelSize)
+            resampled = resample@implanttool.structures.VoxelMap(obj,voxelSize);
+            resampled = implanttool.structures.Volume(resampled.V,0,voxelSize);
+        end
+    end
+end
