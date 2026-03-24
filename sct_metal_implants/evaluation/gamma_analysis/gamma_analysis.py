@@ -23,50 +23,14 @@ GAMMA_OPTIONS = {'interp_fraction': 10,  # Should be 10 or more
 DOSE_DIFFERENCE_CRITERION = 1 # in [%] (measured dose can differ from planned dose by up to 1 %)
 DISTANCE_TO_AGREEMENT = 1 # in [mm] (measured dose point can be up to 1 mm away spatially from planned point)
 
-SPLIT_MAP = {
-    "Pat002": "Split1", #THR
-    "Pat003": "Split1",
-    "Pat004": "Split2",
-    "Pat005": "Split3",
-    "Pat006": "Split1",
-    "Pat009": "Split1",
-    "Pat010": "Split2",
-    "Pat011": "Split3",
-    "Pat012": "Split3",
-    "Pat013": "Split2",
-    "Pat014": "Split2",
-    "Pat017": "Split4",
-    "Pat018": "Split3",
-    "Pat019": "Split4",
-    "Pat020": "Split5",
-    "Pat021": "Split4",
-    "Pat022": "Split5",
-    "Pat023": "Split4",
-    "Pat026": "Split5",
-    "Pat027": "Split5",
-    "Pat007": "Split1", # nails
-    "Pat016": "Split1",
-    "1PA079": "Split1", # synthRAD
-    "1PA147": "Split1",
-    "1PA163": "Split1"
-}
 
-def perform_gamma_analysis(results_path, output_path, MR_path, path_excel):
+def perform_gamma_analysis(RTDose_path, output_path, MR_path, path_excel):
 
     # Load excel with patient data
-    df_patient_info = pd.read_excel(os.path.join(path_excel, "patient_info_synthrad.xlsx"), engine="openpyxl")
-
-    # Dosimetry results path
-    dataset = "patients_with_THR_augmented_balgrist_64"
-    model = "pix2pix"
-    model_name = "MR_in_resnet_weighted_synthrad"
-    resolution = "2mm"
-    all_angles = False
-    configuration = f"RTDose_{resolution}_all_angles" if all_angles else f"RTDose_{resolution}"
+    df_patient_info = pd.read_excel(os.path.join(path_excel, "patient_info.xlsx"), engine="openpyxl")
     file_name = "RTDose_1_physicalDose.dcm"
 
-    RTDose_path = os.path.join(results_path, dataset, model, model_name, configuration)
-    output_path = os.path.join(output_path, dataset, model, model_name, resolution)
+    # Create results directory
     os.makedirs(output_path, exist_ok=True)
 
     # Store results
@@ -76,7 +40,8 @@ def perform_gamma_analysis(results_path, output_path, MR_path, path_excel):
     for pat_idx, pat_row in df_patient_info.iterrows():
 
         patient_nr = pat_row.StudyID
-        start_slice = pat_row.StartSlice
+        split = pat_row.Split
+        start_slice = pat_row.SliceStart
 
         if not os.path.isdir(os.path.join(RTDose_path, "rCT", patient_nr)):
             continue
@@ -97,7 +62,7 @@ def perform_gamma_analysis(results_path, output_path, MR_path, path_excel):
         dmax = np.max(dose_reference)
 
         # Prepare one output row for this patient
-        row = {"patient_nr": patient_nr}
+        row = {"patient_nr": patient_nr, "split": split}
         metric_cols = []
 
         for percentage in DOSE_CUTOFF_PERCENTAGES:
@@ -132,16 +97,7 @@ def save_results_to_excel(results, output_path, metric_cols):
     if isinstance(results[0], dict):
         df = pd.DataFrame(results)
     else:
-        df = pd.DataFrame(results, columns=["patient_nr"] + metric_cols)
-
-    df["patient_nr"] = df["patient_nr"].astype(str)
-
-    # Add split column
-    df["split"] = df["patient_nr"].map(SPLIT_MAP)
-
-    if df["split"].isna().any():
-        missing = df.loc[df["split"].isna(), "patient_nr"].tolist()
-        raise ValueError(f"Missing split assignment for: {missing}")
+        df = pd.DataFrame(results, columns=["patient_nr", "split"] + metric_cols)
 
     # -------- Save detailed results --------
     detailed_path = os.path.join(output_path, "gamma_results.xlsx")
@@ -217,8 +173,8 @@ def calculate_passing_rate(gamma):
     return passing_rate, failing_rate
 
 def load_reference_and_evaluation(path_sCT, path_rCT, n_slices_to_analyze=40):
-    reference = pydicom.read_file(path_sCT, force=True)
-    evaluation = pydicom.read_file(path_rCT, force=True)
+    reference = pydicom.dcmread(path_sCT, force=True)
+    evaluation = pydicom.dcmread(path_rCT, force=True)
 
     axes_reference, dose_reference = pymedphys.dicom.zyx_and_dose_from_dataset(reference)
     axes_evaluation, dose_evaluation = pymedphys.dicom.zyx_and_dose_from_dataset(evaluation)
@@ -375,15 +331,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Run Gamma Analysis
-    perform_gamma_analysis(argparse.path_RTDose_files, argparse.path_output, argparse.path_original_dicom_data, argparse.path_excel)
-
-if __name__ == '__main__old':
-
-    #results_path = "/home/nzala/matlab/dosimetric_calculation/results" # cluster
-
-    results_path = "/media/nico/Extreme SSD/USZ/gamma_analysis/data/" #"/home/nico/Desktop/"
-    output_path = "/media/nico/Extreme SSD/USZ/gamma_analysis/results/test/" #"/home/nico/Desktop/Gamma_analysis_test"
-    MR_path = "/media/nico/Extreme SSD/USZ/data_synthrad_2023/processed_data/with_hip_implant" #"/media/nico/Extreme SSD/Master Thesis/data/with_hip_implant"
-    path_excel = "/media/nico/Extreme SSD/USZ/archive/excels"
-
-    perform_gamma_analysis(results_path, output_path, MR_path, path_excel)
+    perform_gamma_analysis(args.path_RTDose_files, args.path_output, args.path_original_dicom_data, args.path_excel)
