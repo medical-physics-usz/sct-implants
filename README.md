@@ -211,7 +211,7 @@ First the off-resonance map is computed using the implant CT mask, from which th
 
 #### Run Ph Augmentation Pipeline
 
-The code to the pipeline can be found in [/sct_metal_implants/data_augmentation/physics_guided]([sct_metal_implants/data_augmentation/physics_guided) folder.
+The code to the pipeline can be found in [/sct_metal_implants/data_augmentation/physics_guided](/sct_metal_implants/data_augmentation/physics_guided) folder.
 
 1. **Off-resonance map creation** (in MatLab; scripts located in located in [/off-freq](/sct_metal_implants/data_augmentation/physics_guided/off-freq) folder)
    1. Permutations: Rotate metal-implants to have right rotation + Save as ```.MAT``` files.  
