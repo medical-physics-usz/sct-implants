@@ -188,7 +188,7 @@ This excel contains the information about donor and receiver patients.
 
 The DR augmentation pipeline can be run via bash script directly (in [/scripts](/scripts) directory):  
 
-```sbatch data_augmentation_pipeline.sh```  
+```sbatch donor_receiver_augmentation.sh```  
 
 **Note:** Adjust dataset paths and parameters directly in the bash script.
 
@@ -222,11 +222,12 @@ The code to the pipeline can be found in [/sct_metal_implants/data_augmentation/
     Adjust material susceptibility: *titanium alloy* = 154e-6, *cobalt chrom* = 900e-6.
 
 
-2. **MR Augmentation** (in python)
-   1. Undistorted MR creation: Run ```create_undistorted_mr.ipynb```
-   2. Permutations: Make sure off-frequency map matches undistorted MR: Run ```permute_nifti.ipynb```
-   3. Run MR distortion notebook: ```dixon_mr_final_usz.ipynb```  
-    The pipeline is configured for Dixon In-phase images. Please adjust ```TE_ms``` (echo time) and ```BW_pere_pixel``` (bandwidth) according to your MR protocol.
+2. **MR Augmentation** (in python)  
+    The Ph augmenation pipeline can be run via bash script directly (in [/scripts](/scripts) directory): ```sbatch physics_guided_augmentation.sh``` or from command line: ```python run_Ph_augmentation.py --help```. The pipeline performs the following 3 steps:
+   1. Undistorted MR creation (```create_undistorted_mr.py```)
+   2. Permutations: To make sure off-frequency map matches undistorted MR (```permute_B0_maps.py```)
+   3. Creation of distorted (augmented) MR   
+    The pipeline is configured for Dixon In-phase images. Please adjust ```TE_ms``` (echo time) and ```BW_pere_pixel``` (bandwidth) according to your MR protocol (inside ```create_distorted_mr.py```).
     
 
 
