@@ -14,13 +14,13 @@ source activate sct-metal-implants
 
 # Define one or more input DICOM datasets depending on the experiment
 # (e.g., for a mixed dataset also add a path to /patients_without_implant)
-RAW_DICOM_DATA_1="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_with_hip_implant"
+RAW_DICOM_DATA_1="PATH-TO-DICOM-DATA"   # e.g., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
 
 # Define where preprocessed data should be saved
-ROOT_PREPROCESSED="/home/nzala/scratch/datasets/processed_data/patients_TEST"
+ROOT_PREPROCESSED="PATH-TO-OUTPUT"      # e.g., /home/USERNAME/scratch/datasets/processed_data/patients_with_hip_implant
 
 # Define which modalities should be processed
-MODALITIES="CT,MR_in"
+MODALITIES="CT,MR_in" # comma-separated string of modalities "CT,MR_in,MR_opp,MR_W,MR_F"
 
 # Define maximal CT intensity for clipping
 MAX_CT_INTENSITY=3000

@@ -2,7 +2,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=03:30:00
-#SBATCH --output=/home/nzala/data/results/synCT/Ph_augmentation/%j.out
+#SBATCH --output=/PATH-TO-OUTPUT-LOG/%j.out
 
 # Load modules
 module load miniforge3
@@ -12,12 +12,12 @@ source activate sct-metal-implants
 #  Variable definition
 # ====================
 
-DONOR_PATH="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_with_hip_implant/" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
-RECEIVER_PATH="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_without_implant/" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_without_implant
-OUTPUT_PATH="/home/nzala/scratch/datasets/raw_data/patients_augmented_balgrist_TEST" # eg. /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant_augmented
-CONFIG_PATH="/home/nzala/scratch/datasets/raw_data/patients_augmented_balgrist_TEST" # Path to directory with data_augmentation_configurations.xlsx
+DONOR_PATH="PATH-TO-DICOM-DATA-OF-PATIENTS-WITH-IMPLANT" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
+RECEIVER_PATH="PATH-TO-DICOM-DATA-OF-PATIENTS-WITHOUT-IMPLANT" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_without_implant
+OUTPUT_PATH="OUTPUT-PATH-FOR-AUGMENTED-DATA" # eg. /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant_augmented_Ph
+CONFIG_PATH="PATH-TO-DONOR-RECEIVER-CONFIG-DIR" # Path to directory with data_augmentation_configurations.xlsx
 
-REPO_ROOT="/home/nzala/code/paper_repository"
+REPO_ROOT="PATH-TO-REPOSITORY-ROOT" # Path to root of sct-metal-implant-paper repository, eg., "/home/USERNAME/code/paper_repository"
 
 # ====================
 

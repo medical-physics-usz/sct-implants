@@ -2,7 +2,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=3:30:00
-#SBATCH --output=/home/nzala/data/results/synCT/gamma_analysis/%j.out
+#SBATCH --output=/PATH-TO-OUTPUT-LOG/%j.out
 
 # Load modules
 module load miniforge3
@@ -24,15 +24,15 @@ RESOLUTION="2mm" # Resolution of dosimetric evaluation
 ALL_ANGLES=false # False for partial-arc, True for full-arc
 
 if [ "$ALL_ANGLES" = true ]; then
-  CONFIGURATION="RTDose_${RESOLUTION}_all_angles"
+  CONFIGURATION="RTDose_${RESOLUTION}_all_angles" # Full-arcs (all angles)
 else
-  CONFIGURATION="RTDose_${RESOLUTION}"
+  CONFIGURATION="RTDose_${RESOLUTION}" # Partial-arcs (avoidance angles)
 fi
 
-PATH_DATA="/home/nzala/matlab/dosimetric_calculation/results"
-PATH_RESULT="/home/nzala/data/results/gamma_analysis" # eg., /home/USERNAME/data/results/synCT
-DICOM_PATH="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_with_hip_implant"
-PATIENT_INFO_EXCEL_PATH="/home/nzala/scratch/datasets/processed_data/${DATA}/Excel"
+PATH_DATA="PATH-TO-DOSE-FOLDER-ROOT" # Path to root folder where RTDose files are saved from dosimetric_evaluation.sh eg., /home/USERNAME/data/results/synCT/dosimetric_evaluation
+PATH_RESULT="OUTPUT-PATH-FOR-GAMMA-ANALYSIS" # eg., /home/USERNAME/data/results/synCT/gamma_analysis
+DICOM_PATH="PATH-TO-DICOM-DATA-OF-PATIENTS" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
+PATIENT_INFO_EXCEL_PATH="PATH-TO-FOLDER-WITH-PATIENT-INFO-EXCEL/${DATA}/Excel" # Path to Excel containing patient information (patient_info.xlsx)
 
 # ====================
 

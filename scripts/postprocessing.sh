@@ -12,8 +12,8 @@ source activate sct-metal-implants
 #  Variable definition
 # ====================
 
-PATH_ORIGINAL_DICOM_DATA="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_with_hip_implant" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implants
-PATH_FAKE_NIFTI_DATA="/home/nzala/data/results/synCT" # eg., /home/USERNAME/data/results/synCT
+PATH_ORIGINAL_DICOM_DATA="PATH-TO-ORIGINAL-DICOM-DATA" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implants
+PATH_FAKE_NIFTI_DATA="PATH-TO-MODEL-RESULTS-ROOT" # eg., /home/USERNAME/data/results/synCT
 
 DATASET="patients_TEST"  # Dataset name eg., patients_mixed OR patients_mixed_augmented
 MODEL="pix2pix"          # Model name eg. pix2pix, cyclecan, cut
@@ -24,7 +24,7 @@ SPLIT="split2"           # Current split for CV
 INPUT_MODALITIES_NAME="${INPUT_MODALITIES//,/_}"
 NAME="${INPUT_MODALITIES_NAME}_${NET_G}_${SPLIT}" # Name of the experiment, eg., MR_in_resnet_9blocks
 
-PATH_EXCEL="/home/nzala/scratch/datasets/processed_data/${DATASET}/Excel" # eg. folder containing patient_info.xlsx
+PATH_EXCEL="PATH-TO-FOLDER-WITH-PATIENT-INFO-EXCEL/${DATA}/Excel" # Path to Excel containing patient information (patient_info.xlsx)
 
 # ====================
 

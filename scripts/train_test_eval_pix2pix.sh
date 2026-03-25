@@ -14,14 +14,15 @@ source activate sct-metal-implants
 #  Variable definition
 # ====================
 
+MODEL="pix2pix"
 NET_G="resnet_9blocks"           # Generator eg., resnet_9blocks | unet_256 | resnet_spade | resnet_attention | resnet_weighted
-DATA="patients_TEST" # Dataset name eg., patients_mixed OR patients_mixed_augmented
-PATH_DATA="/home/nzala/scratch/datasets/processed_data" # eg., /home/USERNAME/scratch/datasets/processed_data
-PATH_RESULT="/home/nzala/data/results/synCT" # eg., /home/USERNAME/data/results/synCT
-INPUT_MODALITIES="MR_in"    # Input modalities, comma-seperated eg., MR_in,MR_opp,MR_W
+DATA="patients_with_hip_implant" # Dataset name eg., patients_mixed OR patients_mixed_augmented
+PATH_DATA="PATH-TO-PREPROCESSED-DATA-ROOT" # eg., /home/USERNAME/scratch/datasets/processed_data
+PATH_RESULT="PATH-TO-RESULTS-ROOT" # eg., /home/USERNAME/data/results/synCT
+INPUT_MODALITIES="MR_in"         # Input modalities, comma-seperated eg., MR_in,MR_opp,MR_W
 OUTPUT_MODALITIES="CT"           # Output modalities
-PSEUDO_3D_WINDOW=0               # 0 = pure 2D, >0 = pseudo-3D window-size (left and right context of adjacent slices)
-SPLIT="split2"                   # Current split for CV
+PSEUDO_3D_WINDOW=0               # 0 = pure 2D, >0 = pseudo-3D window-size (left  and right context of adjacent slices)
+SPLIT="split1"                   # Current split for CV
 
 INPUT_MODALITIES_NAME="${INPUT_MODALITIES//,/_}"
 NAME="${INPUT_MODALITIES_NAME}_${NET_G}_${SPLIT}" # Name of the experiment, eg., MR_in_resnet_9blocks
@@ -29,7 +30,6 @@ NAME="${INPUT_MODALITIES_NAME}_${NET_G}_${SPLIT}" # Name of the experiment, eg.,
 # ====================
 
 # Derived Variables
-MODEL="pix2pix"
 PATH_DATA_PREPROCESSED="${PATH_DATA}/${DATA}" # Preprocessed data found via PATH-TO-PREPROCESSED-DATA/DATA-SET
 PATH_DATA_SET="${PATH_DATA}/${DATA}/dataset"
 PATH_RESULT_INFERENCE="${PATH_RESULT}/${DATA}/${MODEL}/test/${NAME}"

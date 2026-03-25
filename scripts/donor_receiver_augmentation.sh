@@ -2,7 +2,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=03:30:00
-#SBATCH --output=/home/nzala/data/results/synCT/DR_augmentation/%j.out
+#SBATCH --output=/PATH-TO-OUTPUT-LOG/%j.out
 
 # Load modules
 module load miniforge3
@@ -12,11 +12,11 @@ source activate sct-metal-implants
 #  Variable definition
 # ====================
 
-DONOR_PATH="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_with_hip_implant" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
-RECEIVER_PATH="/shares/tanadini-lang.physik.uzh/sCT/raw_data/patients_without_implant" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_without_implant
-OUTPUT_PATH="/home/nzala/scratch/datasets/raw_data/patients_augmented_TEST" # eg. /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant_augmented
-PLOT_PATH="/home/nzala/scratch/datasets/raw_data/patients_augmented_TEST/plot" # Output path of generated 3D plots of (augmented) implants
-CONFIG_PATH="/home/nzala/scratch/datasets/raw_data/patients_augmented_TEST" # Path to directory with data_augmentation_configurations.xlsx
+DONOR_PATH="PATH-TO-DICOM-DATA-OF-PATIENTS-WITH-IMPLANT" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant
+RECEIVER_PATH="PATH-TO-DICOM-DATA-OF-PATIENTS-WITHOUT-IMPLANT" # eg., /home/USERNAME/scratch/datasets/raw_data/patients_without_implant
+OUTPUT_PATH="OUTPUT-PATH-FOR-AUGMENTED-DATA" # eg. /home/USERNAME/scratch/datasets/raw_data/patients_with_hip_implant_augmented_DR
+PLOT_PATH="OUTPUT-PATH-FOR-GENERATED-3D-PLOTS" # Output path of generated 3D plots of (augmented) implants
+CONFIG_PATH="PATH-TO-DONOR-RECEIVER-CONFIG-DIR" # Path to directory with data_augmentation_configurations.xlsx
 
 # ====================
 
