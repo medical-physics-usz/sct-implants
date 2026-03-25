@@ -144,15 +144,15 @@ The model evaluation is typically applied directly in the train-test-eval pipeli
 ### Dosimetric Evaluation
 ![Dosimetric-Evaluation.png](imgs/Dosimetric-Evaluation.png)
 Clone the [MatRad](https://github.com/e0404/matRad) repository. 
-Use the file ```matRad_hip_implants_all_patients_all_models.m``` to calculate DVH differences
-in the partial arc scenario (avoiding irradiation through implant). And use the file ```matRad_hip_implants_all_patients_all_models_all_angles.m```
+Use the file ```dosimetric_evaluation_hip_implants.m``` to calculate DVH differences
+in the partial arc scenario (avoiding irradiation through implant). And use the file ```dosimetric_evaluation_hip_implants_all_angles.m```
 for the full arc scenario (irradiating through implant). The files can be found in the [/sct_metal_implants/evaluation/dosimetric_evaluation](/sct_metal_implants/evaluation/dosimetric_evaluation) folder.
 
 
 Before running the dosimetric evaluation, the synthetic CT NFTI files have to be resized and resampled to
 DICOM files with original voxel and image size. The following script can be used for this: ```sbatch postprocessing.sh```
 
-The dosimetric evaluation can be run using the bash script: ```run_DVH_calculations.sh```.
+The dosimetric evaluation can be run using the bash script: ```dosimetric_evaluation.sh```.
 Adjust dataset paths and parameters directly in the bash script, which can be found in the [/scripts](/scripts) directory.
 
 
@@ -213,9 +213,9 @@ First the off-resonance map is computed using the implant CT mask, from which th
 
 The code to the pipeline can be found in [/sct_metal_implants/data_augmentation/physics_guided]([sct_metal_implants/data_augmentation/physics_guided) folder.
 
-1. **Off-resonance map creation** (in MatLab) 
+1. **Off-resonance map creation** (in MatLab; scripts located in located in [/off-freq](/sct_metal_implants/data_augmentation/physics_guided/off-freq) folder)
    1. Permutations: Rotate metal-implants to have right rotation + Save as ```.MAT``` files.  
-    Run ```nifti_to_mat.m``` in MatLab
+    Run ```nifti_to_mat.m``` in MatLab  
    2. Run ```calculateoff_frq_usz.m``` in MatLab  
     Adjust ```B0``` (field strength) according to your scanner.  
     Use the ```gamma``` (gyromagnetic ratio) for the imaged nucleus (for proton MRI: *gamma* = 267.51e6 rad/s/T).  
