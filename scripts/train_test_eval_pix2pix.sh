@@ -3,7 +3,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=40G
 #SBATCH --time=10:30:00
-#SBATCH --output=/home/nzala/data/results/synCT/train_test_logs/pix2pix/%j.out
+#SBATCH --output=/PATH-TO-OUTPUT-LOG/%j.out
 
 # Load modules
 module load cuda
