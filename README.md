@@ -28,8 +28,8 @@ The performance requiring calculations were run on a HPC environment with the op
 
 This project was performed using two datasets:
 
-- **Internal University Hospital Zurich (USZ) dataset**, which cannot be shared publicly due to data protection and privacy restrictions.
-- **SynthRAD2023 dataset**, available in the [data/synthRAD2023](/data/synthRAD2023) folder.
+- **Internal dataset**, which cannot be shared publicly due to data protection and privacy restrictions.
+- **SynthRAD2023 dataset**, which can be downloaded from [Zenodo](https://zenodo.org/records/7260705).
 
 ### Expected structure
 
@@ -62,6 +62,28 @@ raw_data/
             ...
 ```
 
+### SynthRAD2023 Dataset
+
+The patients used in this study are tagged in the **`synthRAD_2023_dataset.xlsx`** file located in [/synthRAD2023](data/synthRAD2023). The dataset can be downloaded from Zenodo: https://doi.org/10.5281/zenodo.7260705.
+
+Before running the experiments, prepare the SynthRAD2023 data as follows:
+
+1. Generate the required anatomical segmentations using TotalSegmentator:
+
+```bash
+pip install TotalSegmentator
+
+TotalSegmentator -i <PATH_TO_INPUT_CT> -o <PATH_TO_OUTPUT> --labels femur_left femur_right sacrum urinary_bladder prostate colon
+```
+
+2. Convert the generated segmentations to RTSTRUCT DICOM files:
+
+```bash
+sbatch prepare_synthRAD_data.sh
+```
+
+Once the data has been prepared, continue with the **Data Preprocessing** pipeline.
+
 ---
 ## Data Preprocessing
 
@@ -74,7 +96,9 @@ about data set split and slice information per patient. Place it in ```/Excel```
 #### Running from single script
 The entire pipeline can be run with a single bash script (in [/scripts](/scripts) directory):
 
-```sbatch preprocessing_pipeline.sh```
+```bash
+sbatch preprocessing_pipeline.sh
+```
 
 **Note:** Adjust dataset paths and parameters directly in the bash script.
 Job logs will be saved to the path defined in the --output argument of the script.
