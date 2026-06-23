@@ -2,7 +2,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=03:30:00
-#SBATCH --output=/home/nzala/data/results/synCT/preprocessing/%j.out
+#SBATCH --output=/PATH-TO-OUTPUT-LOG/%j.out
 
 # Load conda environment
 module load miniforge3
