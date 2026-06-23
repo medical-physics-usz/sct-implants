@@ -64,7 +64,7 @@ raw_data/
 
 ### SynthRAD2023 Dataset
 
-The patients used in this study are tagged in the **`synthRAD_2023_dataset.xlsx`** file located in [/synthRAD2023](data/synthRAD2023). The dataset can be downloaded from Zenodo: https://doi.org/10.5281/zenodo.7260705.
+The cases used in this study are tagged in the **`synthRAD_2023_dataset.xlsx`** file located in [/synthRAD2023](data/synthRAD2023). The dataset can be downloaded from Zenodo: https://doi.org/10.5281/zenodo.7260705.
 
 Before running the experiments, prepare the SynthRAD2023 data as follows:
 
