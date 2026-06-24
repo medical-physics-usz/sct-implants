@@ -151,6 +151,17 @@ The scripts can be found in the folder [/scripts](/scripts).
   python test.py --help
   python evaluation.py --help
   ```
+  
+### Pretrained synthRAD model
+
+We provide pretrained pix2pix models trained on synthRAD data in the [/data/pretrained_models](/data/pretrained_models) directory.  
+Set `CHECKPOINT_DIR` in the inference script to the parent directory containing the experiment folder `NAME`, so that the checkpoint is found at `<CHECKPOINT_DIR>/<NAME>/latest_net_G.pth`.  
+
+Run inference and evaluation on the pretrained models using the following bash script, which can be found in the [/scripts](/scripts) folder:
+
+```sbatch test_eval_pretrained_pix2pix.sh```  
+
+Please configure parameters inside the script.
 
 ---
 ## Model Evaluation
@@ -337,6 +348,9 @@ This work builds upon open-source implementations and prior research:
 
 - [medical-physics-usz/synthetic_CT_generation](https://github.com/medical-physics-usz/synthetic_CT_generation)  
   from the Medical Physics group at University Hospital Zurich.
+
+- [matRad](https://github.com/e0404/matRad)  
+  an open-source radiation treatment planning toolkit.
 
 - [Ripple Artifact Quantification in Slice Encoding for SEMAC using MR Block Simulation](https://archive.ismrm.org/2024/0772_LUiM26Rak.html)  
   ISMRM 2024 abstract related to MRI artifact simulation.
