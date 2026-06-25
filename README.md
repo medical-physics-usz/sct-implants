@@ -1,6 +1,5 @@
-# Generating Synthetic CT for Patients with Hip Implants
-
-Source code of **Attention is Matter for Inclusiveness: Generating Synthetic CT for Patients with Hip Implants**. The work investigates the use of GAN-based deep learning methods for generating synthetic CTs from MR images in patients with hip implants, addressing the challenges of metal-induced artifacts. The goal is to enable more robust and inclusive MR-only radiotherapy workflows.
+# Attention is Matter for Inclusiveness: Generating Synthetic CT for Patients with Hip Implants
+The work investigates the use of GAN-based deep learning methods for generating synthetic CTs from MR images in patients with hip implants, addressing the challenges of metal-induced artifacts. The goal is to enable more robust and inclusive MR-only radiotherapy workflows.
 
 ---
 ## Setup Instructions
