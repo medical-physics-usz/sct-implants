@@ -328,6 +328,21 @@ This repository also includes third-party code:
 Their original license files are located in the respective directories.
 
 ---
+## Citation
+
+```bibtex
+@InProceedings{ZalNic_Attention_MICCAI2026,
+        author = { Zala, Nico Camillo AND Lapaeva, Mariia AND Günther, Manuel AND Banchieri, Vittoria AND Deck, Jeanette Carmen AND Sutter, Reto AND von Deuster, Constantin AND Andratschke, Nicolaus AND Guckenberger, Matthias AND Tanadini-Lang, Stephanie AND Dal Bello, Riccardo},
+        title = { { Attention is Matter for Inclusiveness: Generating Synthetic CT for Patients with Hip Implants } },
+        booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2026},
+        year = {2026},
+        publisher = {Springer Nature Switzerland},
+        volume = {LNCS 16890},
+        month = {September},
+        page = {pending}
+}
+```
+---
 ## Acknowledgments
 
 This work builds upon open-source implementations and prior research:
